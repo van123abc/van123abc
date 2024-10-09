@@ -1,0 +1,37 @@
+import curses
+
+love_art = [
+    " ****   ***   ****",
+    "   **   ***    ** ",
+    "   **   ***    ** ",
+    "   **   ***    ** ",
+    "***    ***     ** ",
+    "***    ***     ** ",
+    "***    ***     ** ",
+    " ***  ******  *** ",
+    "  ****** ******   ",
+    "    *********     ",
+    "   *** * *** *    ",
+    "  **   *   *  **  ",
+    " **    *   *   ** ",
+]
+
+def draw_love(stdscr):
+    curses.curs_set(0)  
+    height, width = stdscr.getmaxyx()  
+    start_x = width // 2 - len(love_art[0]) // 2  
+
+    while True:
+        stdscr.clear()
+        
+        for idx, line in enumerate(love_art):
+            y = height // 2 - len(love_art) // 2 + idx
+            x = start_x
+            stdscr.addstr(y, x, line)
+
+        stdscr.refresh()
+        key = stdscr.getch()  
+        if key == ord('q'):  
+            break
+
+curses.wrapper(draw_love)
